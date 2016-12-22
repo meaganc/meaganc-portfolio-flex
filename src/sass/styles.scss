@@ -1,0 +1,134 @@
+//mixins
+@mixin row {
+  display: flex;
+}
+
+@mixin responsive-image {
+  max-width: 100%;
+}
+
+@mixin col($flex-amount) {
+  flex: $flex-amount;
+}
+
+@mixin container {
+  max-width: 100%;
+  margin: 1em 10%;
+}
+
+//colors
+$dark-purple: #1a1423;
+$pink: #b75d69;
+$light-pink: #eacdc2;
+$highlight-peach: #774c60;
+$responsive-breakpoint: 650px;
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-size: 16px;
+  font-family: 'Nunito', sans-serif;
+}
+
+main {
+  @include container;
+}
+
+img {
+  @include responsive-image;
+  @include col(1);
+}
+
+section {
+  @include row;
+}
+
+header {
+  background-color: $pink;
+  height: 7em;
+  color: $dark-purple;
+  border-bottom: .25em solid $dark-purple;
+  @include row;
+
+  .github-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    // https://philipwalton.github.io/solved-by-flexbox/
+    color: $dark-purple;
+    text-decoration: none;
+    @include col(2);
+
+    &:hover {
+      color: $light-pink;
+    }
+
+    .fa {
+      font-size: 2.5em;
+    }
+  }
+
+  .headline-bio {
+    @include col(6);
+    text-align: right;
+    align-items: stretch;
+    margin-right: 2em;
+    display: block;
+
+    h1 {
+      font-family: 'Anton', sans-serif;
+      text-transform: uppercase;
+      margin: .25em 0;
+      font-size: 2.5em;
+
+      @media screen and (min-width: $responsive-breakpoint) {
+        font-size: 3em;
+      }
+    }
+
+    h4 {
+      font-size: .75em;
+      color: $highlight-peach;
+      margin-top: -1em;
+
+      @media screen and (min-width: $responsive-breakpoint) {
+        margin-top: -2em;
+      }
+    }
+  }
+}
+
+.featured-work-wrapper {
+  @media screen and (max-width: $responsive-breakpoint - 1px) {
+    flex-direction: column;
+  }
+
+  article {
+    display: inline-block;
+    margin-right: 0;
+    @include row;
+    flex-direction: column;
+
+    @media screen and (min-width: $responsive-breakpoint) {
+      @include col(1);
+      margin-right: 1.5em;
+    }
+    h3 {
+      text-align: center;
+      text-transform: uppercase; 
+    }
+  }
+
+  article:last-of-type {
+    margin-right: 0;
+  }
+}
+
+footer {
+  text-align: right;
+  margin: 2em 5%;
+  color: $dark-purple;
+}
